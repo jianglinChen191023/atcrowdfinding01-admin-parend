@@ -28,6 +28,13 @@
             <artifactId>atcrowdfunding05-common-util</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+
+        <!-- 依赖 MyBatis 核心表 -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.2.8</version>
+        </dependency>
     </dependencies>
 
 </project>
