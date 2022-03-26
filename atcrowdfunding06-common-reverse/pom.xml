@@ -5,14 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.atguigu.crowd</groupId>
-    <artifactId>atcrowdfinding01-admin-parend</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>atcrowdfunding06-common-reverse</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <modules>
-        <module>atcrowdfunding02-admin-webui</module>
-        <module>atcrowdfunding03-admin-component</module>
-        <module>atcrowdfunding04-admin-entity</module>
-    </modules>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
