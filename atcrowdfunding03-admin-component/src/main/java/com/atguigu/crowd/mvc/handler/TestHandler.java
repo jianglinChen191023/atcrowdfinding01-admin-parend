@@ -4,6 +4,7 @@ import com.atguigu.crowd.entity.Admin;
 import com.atguigu.crowd.entity.ParamData;
 import com.atguigu.crowd.entity.Student;
 import com.atguigu.crowd.service.api.AdminService;
+import com.atguigu.crowd.util.CrowdUtil;
 import com.atguigu.crowd.util.ResultEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -25,8 +27,14 @@ public class TestHandler {
 
     @ResponseBody
     @RequestMapping("/send/compose/object2.json")
-    public ResultEntity<Student> testReceiveComposeObject2(@RequestBody Student student) {
+    public ResultEntity<Student> testReceiveComposeObject2(@RequestBody Student student, HttpServletRequest request) {
+        String a = null;
+        System.out.println(a.length());
+
+        boolean judgeResult = CrowdUtil.judgeRequestType(request);
         Logger logger = LoggerFactory.getLogger(TestHandler.class);
+        logger.info("judgeResult: " + judgeResult);
+
         logger.info(student.toString());
 
         // 将"查询"到的 Student 对象封装到 ResultEntity 中返回
@@ -68,12 +76,21 @@ public class TestHandler {
     }
 
     @RequestMapping("/test/ssm.html")
-    public String testSsm(ModelMap modelMap) {
+    public String testSsm(ModelMap modelMap, HttpServletRequest request) {
+        boolean judgeResult = CrowdUtil.judgeRequestType(request);
+        Logger logger = LoggerFactory.getLogger(TestHandler.class);
+        logger.info("judgeResult: " + judgeResult);
+
         List<Admin> adminList = adminService.getAll();
         System.out.println(adminList);
         modelMap.addAttribute("adminList", adminList);
         modelMap.addAttribute("adminList2", adminList);
         modelMap.addAttribute("adminList4", adminList);
+
+//        System.out.println(10 / 0);
+
+        String a = null;
+        System.out.println(a.length());
 
         return "/target";
     }
