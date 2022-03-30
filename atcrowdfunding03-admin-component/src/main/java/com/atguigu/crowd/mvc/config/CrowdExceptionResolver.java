@@ -1,5 +1,7 @@
 package com.atguigu.crowd.mvc.config;
 
+import com.atguigu.crowd.constant.CrowdConstant;
+import com.atguigu.crowd.exception.LoginFailedException;
 import com.atguigu.crowd.util.CrowdUtil;
 import com.atguigu.crowd.util.ResultEntity;
 import com.google.gson.Gson;
@@ -17,6 +19,25 @@ import java.io.IOException;
 @ControllerAdvice
 public class CrowdExceptionResolver {
 
+    /**
+     * 登录失败异常的处理
+     *
+     * @param exception
+     * @param request
+     * @param response
+     * @return
+     * @throws IOException
+     */
+    @ExceptionHandler(value = LoginFailedException.class)
+    public ModelAndView resolveNullPointerException(
+            LoginFailedException exception,
+            HttpServletRequest request,
+            HttpServletResponse response
+    ) throws IOException {
+        String viewName = "admin-login";
+        return commonExceptionResolver(viewName, exception, request, response);
+    }
+
     @ExceptionHandler(value = ArithmeticException.class)
     public ModelAndView resolveNullPointerException(
             ArithmeticException exception,
@@ -28,13 +49,12 @@ public class CrowdExceptionResolver {
     }
 
     /**
-     * @ExceptionHandler: 将一个具体的异常类型和一个方法关联起来
-     *
      * @param exception
      * @param request
      * @param response
      * @return
      * @throws IOException
+     * @ExceptionHandler: 将一个具体的异常类型和一个方法关联起来
      */
     @ExceptionHandler(value = NullPointerException.class)
     public ModelAndView resolveNullPointerException(
@@ -80,7 +100,7 @@ public class CrowdExceptionResolver {
         ModelAndView modelAndView = new ModelAndView();
 
         // 9. 将 Exception 对象存入模型
-        modelAndView.addObject("exception", exception);
+        modelAndView.addObject(CrowdConstant.ATTR_NAME_EXCEPTION, exception);
 
         // 10. 设置对应的视图名称
         modelAndView.setViewName(viewName);

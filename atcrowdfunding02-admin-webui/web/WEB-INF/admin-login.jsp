@@ -50,6 +50,7 @@
         <h2 class="form-signin-heading">
             <i class="glyphicon glyphicon-log-in"></i> 管理员登录
         </h2>
+        ${ requestScope.exception.message }
         <div class="form-group has-success has-feedback">
             <input type="text" class="form-control" id="floginacct"
                    name="loginAcct" value="tom" placeholder="请输入登录账号"
