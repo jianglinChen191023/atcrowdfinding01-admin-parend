@@ -2,6 +2,8 @@ package com.atguigu.crowd.mvc.config;
 
 import com.atguigu.crowd.constant.CrowdConstant;
 import com.atguigu.crowd.exception.AccessForbiddenException;
+import com.atguigu.crowd.exception.LoginAcctAlreadyInUseException;
+import com.atguigu.crowd.exception.LoginAcctAlyeadyInUseForUpdateException;
 import com.atguigu.crowd.exception.LoginFailedException;
 import com.atguigu.crowd.util.CrowdUtil;
 import com.atguigu.crowd.util.ResultEntity;
@@ -19,6 +21,44 @@ import java.io.IOException;
  */
 @ControllerAdvice
 public class CrowdExceptionResolver {
+
+    /**
+     * 修改 Admin 时如果检测到登录账户重复抛出这个异常 的处理
+     *
+     * @param exception
+     * @param request
+     * @param response
+     * @return
+     * @throws IOException
+     */
+    @ExceptionHandler(value = LoginAcctAlyeadyInUseForUpdateException.class)
+    public ModelAndView resolveException(
+            LoginAcctAlyeadyInUseForUpdateException exception,
+            HttpServletRequest request,
+            HttpServletResponse response
+    ) throws IOException {
+        String viewName = "admin-login";
+        return commonExceptionResolver(viewName, exception, request, response);
+    }
+
+    /**
+     * 保存 Admin 时如果检测到登录账户重复抛出这个异常 的处理
+     *
+     * @param exception
+     * @param request
+     * @param response
+     * @return
+     * @throws IOException
+     */
+    @ExceptionHandler(value = LoginAcctAlreadyInUseException.class)
+    public ModelAndView resolveException(
+            LoginAcctAlreadyInUseException exception,
+            HttpServletRequest request,
+            HttpServletResponse response
+    ) throws IOException {
+        String viewName = "admin-add";
+        return commonExceptionResolver(viewName, exception, request, response);
+    }
 
     /**
      * 用户没有登录就访问受保护资源时抛出的异常 的处理
