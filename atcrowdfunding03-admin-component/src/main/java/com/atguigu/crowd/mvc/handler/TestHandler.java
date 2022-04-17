@@ -25,6 +25,27 @@ public class TestHandler {
     @Autowired
     private AdminService adminService;
 
+    /**
+     * 跳转到测试页面
+     * @return
+     */
+    @RequestMapping("/test/to/index.html")
+    public String toTest() {
+
+        return "test";
+    }
+
+    /**
+     * 测试 Ajax 的工作模式
+     */
+    @ResponseBody
+    @RequestMapping("/test/ajax/async.html")
+    public String testAsync() throws InterruptedException {
+        Thread.sleep(2000);
+
+        return "success";
+    }
+
     @ResponseBody
     @RequestMapping("/send/compose/object2.json")
     public ResultEntity<Student> testReceiveComposeObject2(@RequestBody Student student, HttpServletRequest request) {
