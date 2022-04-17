@@ -11,6 +11,9 @@
                 'url': 'test/ajax/async.html',
                 'type': 'post',
                 'dataType': 'text',
+                // 关闭异步工作模式, 使用同步方式工作
+                // 此时: 所有操作在同一个线程内按顺序完成
+                'async': false,
                 'success': function (response) {
                     // success 是接收到服务器端响应后执行
                     console.log('ajax 函数内部的 success 是函数 ' + response);
