@@ -1,3 +1,6 @@
+/**
+ * git checkout -b 8.0.0_permission
+ */
 $(function () {
     // 调用专门封装好的函数初始化树形结构
     generateTree();
