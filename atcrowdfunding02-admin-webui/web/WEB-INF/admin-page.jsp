@@ -125,8 +125,11 @@
                                         <td>${ admin.userName }</td>
                                         <td>${ admin.email }</td>
                                         <td>
-                                            <button type="button" class="btn btn-success btn-xs"><i
-                                                    class=" glyphicon glyphicon-check"></i></button>
+                                                <%-- 旧代码
+                                                <button type="button" class="btn btn-success btn-xs"><i
+                                                        class=" glyphicon glyphicon-check"></i></button>--%>
+                                            <a href="assign/to/assign/role/page.html?adminId=${ admin.id }&pageNum=${ requestScope.pageInfo.pageNum }&keyword=${ param.keyword }"
+                                               class="btn btn-success btn-xs"><i class="glyphicon glyphicon-check"></i></a>
                                             <!-- 旧代码 - 编辑
                                             <button type="button" class="btn btn-primary btn-xs">
                                                 <i class=" glyphicon glyphicon-pencil"></i>

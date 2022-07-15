@@ -27,15 +27,42 @@ public class AdminServiceImpl implements AdminService {
     private AdminMapper adminMapper;
 
     @Override
-    public void updateAdmin(Admin admin){
+    public void updateAdmin(Admin admin) {
         try {
             // "Selective" 表示有选择的更新, 对于 null 值得字段不更新
             adminMapper.updateByPrimaryKeySelective(admin);
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            if(e instanceof DuplicateKeyException) {
+            if (e instanceof DuplicateKeyException) {
                 throw new LoginAcctAlyeadyInUseForUpdateException(CrowdConstant.MESSAGE_LOGIN_ACCT_ALREADY_IN_USE);
             }
+        }
+    }
+
+    @Override
+    public void saveAdminRoleRelationship(Integer adminId, List<Integer> roleIdList) {
+        // 旧数据如下
+        // adminId roleId
+        // 1       1(要删除)
+        // 1       2(要删除)
+        // 1       3
+        // 1       4
+        // 1       5
+        // 新数据如下
+        // adminId roleId
+        // 1       3(本来就有)
+        // 1       4(本来就有)
+        // 1       5(本来就有)
+        // 1       6(新增)
+        // 1       7(新增)
+        // 方案一: 根据 adminId 删除有旧数据, 再保存全部新数据
+
+        // 1. 根据 AdminId 删除所有旧的关联关系数据
+        adminMapper.deleteOldRelationship(adminId);
+
+        // 2. 根据 roleIdList 和 adminId 保存新的关联关系数据
+        if (roleIdList != null && roleIdList.size() > 0) {
+            adminMapper.insertNewRelationship(adminId, roleIdList);
         }
     }
 

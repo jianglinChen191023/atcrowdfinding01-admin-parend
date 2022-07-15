@@ -39,5 +39,9 @@ public interface AdminMapper {
      */
     List<Admin> selectAdminByKeyword(String keyword);
 
+    void deleteOldRelationship(Integer adminId);
+
+    void insertNewRelationship(@Param("adminId") Integer adminId,@Param("roleIdList") List<Integer> roleIdList);
+
     /* 自定义 end */
 }
