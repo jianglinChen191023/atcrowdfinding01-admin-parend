@@ -4,8 +4,10 @@
 <html lang="zn-CN">
 <%@include file="/WEB-INF/include-head.jsp" %>
 <link rel="stylesheet" href="css/pagination.css"/>
+<link rel="stylesheet" href="ztree/zTreeStyle.css"/>
 <script type="text/javascript" src="jquery/jquery.pagination.js"></script>
-<script src="crowd/js/my-role.js?v=6" type="text/javascript"></script>
+<script type="text/javascript" src="ztree/jquery.ztree.all-3.5.min.js"></script>
+<script src="crowd/js/my-role.js?v=1" type="text/javascript"></script>
 <body>
 
 <%@include file="/WEB-INF/include-nav.jsp" %>
@@ -69,5 +71,6 @@
 <%@include file="/WEB-INF/modal-role-add.jsp" %>
 <%@include file="/WEB-INF/modal-role-edit.jsp" %>
 <%@include file="/WEB-INF/modal-role-confirm.jsp" %>
+<%@include file="/WEB-INF/modal-role-assign-auth.jsp" %>
 </body>
 </html>

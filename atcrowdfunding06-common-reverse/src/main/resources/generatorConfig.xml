@@ -15,7 +15,7 @@
                 driverClass="com.mysql.jdbc.Driver"
                 connectionURL="jdbc:mysql://175.178.174.83:3306/project_crowd"
                 userId="root"
-                password="root"/>
+                password="@root1314"/>
 
         <!-- 默认 false. 把 JDBC DECIMAL 和 NUMERIC 类型解析为 Integer,
              为 true 时把 JDBC DECIMAL 和 NUMERIC 类型解析为 java.math.BigDecimal-->
@@ -53,6 +53,7 @@
         <!-- 数据库表名字和我们的 entity 类对应的映射指定 -->
         <!--        <table tableName="t_admin" domainObjectName="Admin"/>-->
         <!--        <table tableName="t_role" domainObjectName="Role"/>-->
-        <table tableName="t_menu" domainObjectName="Menu"/>
+        <!--        <table tableName="t_menu" domainObjectName="Menu"/>-->
+        <table tableName="t_auth" domainObjectName="Auth"/>
     </context>
 </generatorConfiguration>
