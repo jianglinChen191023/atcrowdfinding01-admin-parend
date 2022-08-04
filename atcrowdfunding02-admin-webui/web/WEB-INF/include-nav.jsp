@@ -18,7 +18,15 @@
                             <li><a href="#"><i class="glyphicon glyphicon-comment"></i> 消息</a></li>
                             <li class="divider"></li>
                             <%--                            <li><a href="admin/do/logout.html"><i class="glyphicon glyphicon-off"></i> 退出系统</a></li>--%>
-                            <li><a href="security/do/logout.html"><i class="glyphicon glyphicon-off"></i> 退出系统</a></li>
+                            <li>
+                                <%--                                <a href="security/do/logout.html"> <i class="glyphicon glyphicon-off"></i> 退出系统</a>--%>
+                                <form id="loginForm" action="security/do/logout.html" method="POST"
+                                      class="form-signin" role="form">
+                                    <input type="hidden" name="${_csrf.parameterName}"
+                                           value="${_csrf.token}"/>
+                                    <button style="background-color: #FFF;border: 0;width: 100%;" type="submit"><i class="glyphicon glyphicon-off"></i> 退出系统</button>
+                                </form>
+                            </li>
                         </ul>
                     </div>
                 </li>

@@ -48,8 +48,8 @@
 <%--    <form id="loginForm" action="admin/do/login.html" method="POST"--%>
     <form id="loginForm" action="security/do/login.html" method="POST"
           class="form-signin" role="form">
-<%--        <input type="hidden" name="${_csrf.parameterName}"--%>
-<%--               value="${_csrf.token}" />--%>
+        <input type="hidden" name="${_csrf.parameterName}"
+               value="${_csrf.token}" />
         <h2 class="form-signin-heading">
             <i class="glyphicon glyphicon-log-in"></i> 管理员登录
         </h2>

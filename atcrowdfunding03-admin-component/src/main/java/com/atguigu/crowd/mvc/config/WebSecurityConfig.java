@@ -46,8 +46,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("loginAcct")
                 .passwordParameter("userPswd")
                 .and()
-                .csrf()
-                .disable()
                 // 开启退出登录功能
                 .logout()
                 .logoutUrl("/security/do/logout.html")
