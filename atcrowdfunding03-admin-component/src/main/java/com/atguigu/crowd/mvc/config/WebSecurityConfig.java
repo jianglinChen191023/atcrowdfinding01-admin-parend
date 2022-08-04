@@ -1,0 +1,57 @@
+package com.atguigu.crowd.mvc.config;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+
+@Configuration
+@EnableWebSecurity
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .authorizeRequests()
+                // 无条件访问
+                .antMatchers("/bootstrap/**").permitAll()
+                .antMatchers("/crowd/**").permitAll()
+                .antMatchers("/css/**").permitAll()
+                .antMatchers("/fonts/**").permitAll()
+                .antMatchers("/img/**").permitAll()
+                .antMatchers("/jquery/**").permitAll()
+                .antMatchers("/layer/**").permitAll()
+                .antMatchers("/script/**").permitAll()
+                .antMatchers("/WEB-INF/**").permitAll()
+                .antMatchers("/ztree/**").permitAll()
+                // 其他请求需要认证
+                .anyRequest()
+                .authenticated()
+                .and()
+                .formLogin()
+                // 指定登录页面
+                .loginPage("/admin/to/login/page.html")
+                .permitAll()
+                // 指定登录成功后跳转的地址
+                .defaultSuccessUrl("/admin/to/main/page.html")
+                // 指定表单登录请求
+                .loginProcessingUrl("/security/do/login.html")
+                // 账号的请求参数名称
+                .usernameParameter("loginAcct")
+                .passwordParameter("userPswd")
+                .and()
+                .csrf()
+                .disable()
+                // 开启退出登录功能
+                .logout()
+                .logoutUrl("/security/do/logout.html")
+                .logoutSuccessUrl("/admin/to/login/page.html")
+        ;
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication().withUser("tom").password("123123").roles("ADMIN");
+    }
+}

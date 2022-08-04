@@ -45,12 +45,16 @@
 
 <div class="container">
 
-    <form id="loginForm" action="admin/do/login.html" method="POST"
+<%--    <form id="loginForm" action="admin/do/login.html" method="POST"--%>
+    <form id="loginForm" action="security/do/login.html" method="POST"
           class="form-signin" role="form">
+<%--        <input type="hidden" name="${_csrf.parameterName}"--%>
+<%--               value="${_csrf.token}" />--%>
         <h2 class="form-signin-heading">
             <i class="glyphicon glyphicon-log-in"></i> 管理员登录
         </h2>
-        ${ requestScope.exception.message }
+<%--        ${ requestScope.exception.message }--%>
+        <p>${SPRING_SECURITY_LAST_EXCEPTION.message}</p>
         <div class="form-group has-success has-feedback">
             <input type="text" class="form-control" id="floginacct"
                    name="loginAcct" value="tom" placeholder="请输入登录账号"
@@ -62,7 +66,7 @@
         <div class="form-group has-success has-feedback">
             <input type="password" class="form-control"
                    onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;"
-                   id="fuserpswd" name="userPswd" value="123456" placeholder="请输入登录密码"
+                   id="fuserpswd" name="userPswd" value="123123" placeholder="请输入登录密码"
                    style="margin-top: 10px;"> <span
                 class="glyphicon glyphicon-lock form-control-feedback"></span>
         </div>
