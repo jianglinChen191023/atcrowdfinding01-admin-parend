@@ -21,6 +21,7 @@
                 <div class="panel-heading">表单数据<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-question-sign"></i></div></div>
                 <div class="panel-body">
                     <form action="admin/save.html" method="post" role="form">
+                        <input type="hidden" name="_csrf" value="${_csrf.token}" />
                         <p>${ requestScope.exception.message }</p>
                         <div class="form-group">
                             <label for="loginAcct">登录账号</label>
