@@ -365,7 +365,8 @@ function getPageInfoRemote() {
     var result = '';
     $.ajax({
         url: 'role/get/page/info.json',
-        type: 'post',
+        // type: 'post',
+        type: 'get',
         data: {
             pageNum: window.pageNum,
             pageSize: window.pageSize,

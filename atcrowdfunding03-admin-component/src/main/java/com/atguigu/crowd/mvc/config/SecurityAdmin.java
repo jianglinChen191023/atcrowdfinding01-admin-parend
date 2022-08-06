@@ -25,6 +25,8 @@ public class SecurityAdmin extends User {
         super(originalAdmin.getLoginAcct(), originalAdmin.getUserPswd(), authorities);
         // 给本类的 this.originalAdmin 赋值
         this.originalAdmin = originalAdmin;
+        // 将原始 Admin 对象中的密码擦除
+        this.originalAdmin.setUserPswd(null);
     }
 
     // 对外提供的获取原始 Admin 对象的 getXxx 方法
