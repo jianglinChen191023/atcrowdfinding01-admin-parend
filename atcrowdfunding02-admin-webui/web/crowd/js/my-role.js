@@ -236,7 +236,7 @@ $(function () {
 
         var data = {
             authIdArray: authIdArray,
-            roleId: [window.roleId]
+            roleId: [window.roleId],
         }
 
         // 发送请求执行分配

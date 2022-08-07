@@ -23,6 +23,23 @@ import java.io.IOException;
 public class CrowdExceptionResolver {
 
     /**
+     * @param exception
+     * @param request
+     * @param response
+     * @return
+     * @throws IOException
+     */
+    @ExceptionHandler(value = Exception.class)
+    public ModelAndView resolveException(
+            Exception exception,
+            HttpServletRequest request,
+            HttpServletResponse response
+    ) throws IOException {
+        String viewName = "admin-login";
+        return commonExceptionResolver(viewName, exception, request, response);
+    }
+
+    /**
      * 修改 Admin 时如果检测到登录账户重复抛出这个异常 的处理
      *
      * @param exception
@@ -148,6 +165,9 @@ public class CrowdExceptionResolver {
 
             // 5. 将 ResultEntity 对象转换为 JSON 对象
             String json = gson.toJson(resultEntity);
+
+            // 返回JSON, 处理乱码
+            response.setContentType("application/json;charset=UTF-8");
 
             // 6. 将 JSON 字符串作为响应体返回
             response.getWriter().write(json);

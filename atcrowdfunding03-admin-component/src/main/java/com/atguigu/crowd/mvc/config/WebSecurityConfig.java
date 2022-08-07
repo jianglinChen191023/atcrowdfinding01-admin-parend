@@ -1,8 +1,10 @@
 package com.atguigu.crowd.mvc.config;
 
+import com.atguigu.crowd.constant.CrowdConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -11,6 +13,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
+// 启用全局方法权限控制功能
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -27,6 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
+                .antMatchers("/admin/get/page.html").hasRole("经理")
                 // 无条件访问
                 .antMatchers("/bootstrap/**").permitAll()
                 .antMatchers("/crowd/**").permitAll()
@@ -41,6 +46,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 其他请求需要认证
                 .anyRequest()
                 .authenticated()
+                .and()
+                .exceptionHandling()
+                .accessDeniedHandler((request, response, accessDeniedException) -> {
+                    request.setAttribute("exception", new Exception(CrowdConstant.MESSAGE_ACCESS_DENIED));
+                    request.getRequestDispatcher("/WEB-INF/system-error.jsp").forward(request, response);
+                })
                 .and()
                 .formLogin()
                 // 指定登录页面
@@ -58,9 +69,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutUrl("/security/do/logout.html")
                 .logoutSuccessUrl("/admin/to/login/page.html")
+                .and().csrf().disable()
         ;
-
-//        http.csrf().disable();
     }
 
     @Override
@@ -72,4 +82,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //        auth.userDetailsService(userDetailsService).passwordEncoder(getBCryptPasswordEncoder());
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
     }
+
 }
