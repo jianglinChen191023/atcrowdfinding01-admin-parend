@@ -91,10 +91,13 @@
                     </button>
                     -->
                     <!-- 新代码 -->
-                    <a style="float:right;" href="admin/to/add/page.html" class="btn btn-primary">
-                        <i class="glyphicon glyphicon-plus"></i>
-                        新增
-                    </a>
+                    <%-- 对新增按钮进行权限控制 --%>
+                    <security:authorize access="hasAuthority('user:save')">
+                        <a style="float:right;" href="admin/to/add/page.html" class="btn btn-primary">
+                            <i class="glyphicon glyphicon-plus"></i>
+                            新增
+                        </a>
+                    </security:authorize>
 
                     <br>
                     <hr style="clear:both;">
