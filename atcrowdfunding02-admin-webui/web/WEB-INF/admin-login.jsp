@@ -54,6 +54,7 @@
             <i class="glyphicon glyphicon-log-in"></i> 管理员登录
         </h2>
 <%--        ${ requestScope.exception.message }--%>
+        ${ requestScope.exception.message }
         <p>${SPRING_SECURITY_LAST_EXCEPTION.message}</p>
         <div class="form-group has-success has-feedback">
             <input type="text" class="form-control" id="floginacct"

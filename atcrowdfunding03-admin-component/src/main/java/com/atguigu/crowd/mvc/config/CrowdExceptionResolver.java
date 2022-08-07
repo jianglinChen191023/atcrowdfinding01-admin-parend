@@ -35,7 +35,7 @@ public class CrowdExceptionResolver {
             HttpServletRequest request,
             HttpServletResponse response
     ) throws IOException {
-        String viewName = "admin-login";
+        String viewName = "system-error";
         return commonExceptionResolver(viewName, exception, request, response);
     }
 

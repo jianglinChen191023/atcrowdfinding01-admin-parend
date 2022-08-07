@@ -31,7 +31,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/admin/get/page.html").hasRole("经理")
+                .antMatchers("/admin/get/page.html")
+//                .hasRole("经理")
+                // 要求/admin/get/page.html请求需要经理角色或者user:get权限
+                .access("hasRole('经理') or hasAuthority('user:get')")
                 // 无条件访问
                 .antMatchers("/bootstrap/**").permitAll()
                 .antMatchers("/crowd/**").permitAll()
