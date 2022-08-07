@@ -13,7 +13,8 @@
                                 data-toggle="dropdown">
                             <i class="glyphicon glyphicon-user"></i>
                             <%--                            ${ sessionScope.loginAdmin.userName }--%>
-                            <security:authentication property="name"/>
+                            <%--                            <security:authentication property="name"/>--%>
+                            <security:authentication property="principal.originalAdmin.userName"/>
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" role="menu">
