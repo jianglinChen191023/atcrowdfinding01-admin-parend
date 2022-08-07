@@ -1,3 +1,19 @@
+/*
+ Navicat Premium Data Transfer
+
+ Source Server         : 腾讯云
+ Source Server Type    : MySQL
+ Source Server Version : 50738
+ Source Host           : 175.178.174.83:3306
+ Source Schema         : project_crowd
+
+ Target Server Type    : MySQL
+ Target Server Version : 50738
+ File Encoding         : 65001
+
+ Date: 08/08/2022 03:58:48
+*/
+
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
@@ -10,18 +26,17 @@ CREATE TABLE `inner_admin_role` (
                                     `admin_id` int(11) DEFAULT NULL,
                                     `role_id` int(11) DEFAULT NULL,
                                     PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COMMENT='用户和权限中间表';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='用户和权限中间表';
 
 -- ----------------------------
 -- Records of inner_admin_role
 -- ----------------------------
 BEGIN;
-INSERT INTO `inner_admin_role` (`id`, `admin_id`, `role_id`) VALUES (4, 2, 1);
-INSERT INTO `inner_admin_role` (`id`, `admin_id`, `role_id`) VALUES (5, 2, 2);
-INSERT INTO `inner_admin_role` (`id`, `admin_id`, `role_id`) VALUES (6, 2, 3);
-INSERT INTO `inner_admin_role` (`id`, `admin_id`, `role_id`) VALUES (18, 1, 3);
-INSERT INTO `inner_admin_role` (`id`, `admin_id`, `role_id`) VALUES (19, 1, 1);
-INSERT INTO `inner_admin_role` (`id`, `admin_id`, `role_id`) VALUES (20, 1, 2);
+INSERT INTO `inner_admin_role` (`id`, `admin_id`, `role_id`) VALUES (1, 2, 2);
+INSERT INTO `inner_admin_role` (`id`, `admin_id`, `role_id`) VALUES (2, 2, 4);
+INSERT INTO `inner_admin_role` (`id`, `admin_id`, `role_id`) VALUES (3, 1, 1);
+INSERT INTO `inner_admin_role` (`id`, `admin_id`, `role_id`) VALUES (4, 1, 3);
+INSERT INTO `inner_admin_role` (`id`, `admin_id`, `role_id`) VALUES (5, 7, 5);
 COMMIT;
 
 -- ----------------------------
@@ -33,14 +48,15 @@ CREATE TABLE `inner_role_auth` (
                                    `role_id` int(11) DEFAULT NULL,
                                    `auth_id` int(11) DEFAULT NULL,
                                    PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='角色和权限中间表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='角色和权限中间表';
 
 -- ----------------------------
 -- Records of inner_role_auth
 -- ----------------------------
 BEGIN;
-INSERT INTO `inner_role_auth` (`id`, `role_id`, `auth_id`) VALUES (11, 1, 1);
-INSERT INTO `inner_role_auth` (`id`, `role_id`, `auth_id`) VALUES (12, 1, 2);
+INSERT INTO `inner_role_auth` (`id`, `role_id`, `auth_id`) VALUES (1, 3, 4);
+INSERT INTO `inner_role_auth` (`id`, `role_id`, `auth_id`) VALUES (2, 4, 6);
+INSERT INTO `inner_role_auth` (`id`, `role_id`, `auth_id`) VALUES (3, 4, 3);
 COMMIT;
 
 -- ----------------------------
@@ -50,19 +66,24 @@ DROP TABLE IF EXISTS `t_admin`;
 CREATE TABLE `t_admin` (
                            `id` int(11) NOT NULL AUTO_INCREMENT,
                            `login_acct` varchar(255) NOT NULL,
-                           `user_pswd` char(32) NOT NULL,
+                           `user_pswd` varchar(255) NOT NULL,
                            `user_name` varchar(255) NOT NULL,
                            `email` varchar(255) NOT NULL,
-                           `create_time` char(19) DEFAULT NULL,
+                           `create_time` datetime DEFAULT NULL,
                            PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_admin
 -- ----------------------------
 BEGIN;
-INSERT INTO `t_admin` (`id`, `login_acct`, `user_pswd`, `user_name`, `email`, `create_time`) VALUES (1, 'eav', '123123', '伊娃', 'eva@qq.com', '2022-06-23 02:17:34');
-INSERT INTO `t_admin` (`id`, `login_acct`, `user_pswd`, `user_name`, `email`, `create_time`) VALUES (2, 'tom', 'e10adc3949ba59abbe56e057f20f883e', '汤姆', 'tom@qq.com', '2022-06-23 02:17:34');
+INSERT INTO `t_admin` (`id`, `login_acct`, `user_pswd`, `user_name`, `email`, `create_time`) VALUES (1, 'adminOperator', '$2a$10$YlFApwsuOTRxvVlzIKJ1IO20wPftE57QovWuBsKoh2NEYZWKLT6jK', '经理', '1@qq.com', '2022-08-06 15:50:25');
+INSERT INTO `t_admin` (`id`, `login_acct`, `user_pswd`, `user_name`, `email`, `create_time`) VALUES (2, 'roleOperator', '$2a$10$YlFApwsuOTRxvVlzIKJ1IO20wPftE57QovWuBsKoh2NEYZWKLT6jK', '部长', '2@qq.com', '2022-08-06 15:50:25');
+INSERT INTO `t_admin` (`id`, `login_acct`, `user_pswd`, `user_name`, `email`, `create_time`) VALUES (3, 'admin01', '$2a$10$YlFApwsuOTRxvVlzIKJ1IO20wPftE57QovWuBsKoh2NEYZWKLT6jK', '路人甲', '3@qq.com', '2022-08-06 15:50:25');
+INSERT INTO `t_admin` (`id`, `login_acct`, `user_pswd`, `user_name`, `email`, `create_time`) VALUES (4, 'admin02', '2a$10$YlFApwsuOTRxvVlzIKJ1IO20wPftE57QovWuBsKoh2NEYZWKLT6jK', '路人甲', '3@qq.com', '2022-08-06 15:50:25');
+INSERT INTO `t_admin` (`id`, `login_acct`, `user_pswd`, `user_name`, `email`, `create_time`) VALUES (5, 'admin03', '$2a$10$YlFApwsuOTRxvVlzIKJ1IO20wPftE57QovWuBsKoh2NEYZWKLT6jK', '路人甲', '3@qq.com', '2022-08-06 15:50:25');
+INSERT INTO `t_admin` (`id`, `login_acct`, `user_pswd`, `user_name`, `email`, `create_time`) VALUES (6, 'CS3', '$2a$10$elqat0c.KxAlnRV58VOBfuCMboRRNnKG4Qs1bcc4qJDAQTqPLDRTi', '测试3', '1912623646@qq.com', '2022-08-08 01:46:56');
+INSERT INTO `t_admin` (`id`, `login_acct`, `user_pswd`, `user_name`, `email`, `create_time`) VALUES (7, 'root', '$2a$10$YlFApwsuOTRxvVlzIKJ1IO20wPftE57QovWuBsKoh2NEYZWKLT6jK', '超级管理员', '0@qq.com', '2022-08-08 03:10:44');
 COMMIT;
 
 -- ----------------------------
@@ -75,7 +96,7 @@ CREATE TABLE `t_auth` (
                           `title` varchar(200) DEFAULT NULL,
                           `category_id` int(11) DEFAULT NULL,
                           PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='权限表';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='权限表';
 
 -- ----------------------------
 -- Records of t_auth
@@ -83,11 +104,12 @@ CREATE TABLE `t_auth` (
 BEGIN;
 INSERT INTO `t_auth` (`id`, `name`, `title`, `category_id`) VALUES (1, '', '用户模块', NULL);
 INSERT INTO `t_auth` (`id`, `name`, `title`, `category_id`) VALUES (2, 'user:delete', '删除', 1);
-INSERT INTO `t_auth` (`id`, `name`, `title`, `category_id`) VALUES (3, '', '查询', 1);
-INSERT INTO `t_auth` (`id`, `name`, `title`, `category_id`) VALUES (4, '', '角色模块', NULL);
-INSERT INTO `t_auth` (`id`, `name`, `title`, `category_id`) VALUES (5, '', '删除', 4);
-INSERT INTO `t_auth` (`id`, `name`, `title`, `category_id`) VALUES (6, '', '查询', 4);
-INSERT INTO `t_auth` (`id`, `name`, `title`, `category_id`) VALUES (7, '', '新增', 4);
+INSERT INTO `t_auth` (`id`, `name`, `title`, `category_id`) VALUES (3, 'user:get', '查询', 1);
+INSERT INTO `t_auth` (`id`, `name`, `title`, `category_id`) VALUES (4, 'user:save', '保存', 1);
+INSERT INTO `t_auth` (`id`, `name`, `title`, `category_id`) VALUES (5, '', '角色模块', NULL);
+INSERT INTO `t_auth` (`id`, `name`, `title`, `category_id`) VALUES (6, 'role:delete', '删除', 4);
+INSERT INTO `t_auth` (`id`, `name`, `title`, `category_id`) VALUES (7, 'role:get', '查询', 4);
+INSERT INTO `t_auth` (`id`, `name`, `title`, `category_id`) VALUES (8, 'role:save', '保存', 4);
 COMMIT;
 
 -- ----------------------------
@@ -135,7 +157,7 @@ COMMIT;
 DROP TABLE IF EXISTS `t_role`;
 CREATE TABLE `t_role` (
                           `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '角色 ID',
-                          `name` char(100) DEFAULT '1',
+                          `name` varchar(255) DEFAULT NULL,
                           PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
@@ -143,11 +165,11 @@ CREATE TABLE `t_role` (
 -- Records of t_role
 -- ----------------------------
 BEGIN;
-INSERT INTO `t_role` (`id`, `name`) VALUES (1, 'A');
-INSERT INTO `t_role` (`id`, `name`) VALUES (2, 'B');
-INSERT INTO `t_role` (`id`, `name`) VALUES (3, 'role01');
-INSERT INTO `t_role` (`id`, `name`) VALUES (4, 'role02');
-INSERT INTO `t_role` (`id`, `name`) VALUES (5, 'role03');
+INSERT INTO `t_role` (`id`, `name`) VALUES (1, '经理');
+INSERT INTO `t_role` (`id`, `name`) VALUES (2, '部长');
+INSERT INTO `t_role` (`id`, `name`) VALUES (3, '经理操作者');
+INSERT INTO `t_role` (`id`, `name`) VALUES (4, '部长操作者');
+INSERT INTO `t_role` (`id`, `name`) VALUES (5, 'Admin');
 COMMIT;
 
 SET FOREIGN_KEY_CHECKS = 1;
