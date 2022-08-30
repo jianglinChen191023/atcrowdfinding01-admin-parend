@@ -1,18 +1,113 @@
 package com.atguigu.crowd.util;
 
 import com.aliyun.api.gateway.demo.util.HttpUtils;
+import com.aliyun.oss.OSS;
+import com.aliyun.oss.OSSClientBuilder;
+import com.aliyun.oss.common.comm.ResponseMessage;
+import com.aliyun.oss.model.PutObjectResult;
 import com.atguigu.crowd.constant.CrowdConstant;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class CrowdUtil {
+
+    public static void main(String[] args) throws FileNotFoundException {
+        FileInputStream inputStream = new FileInputStream("/Users/chenjianglin/Desktop/333.jpg");
+        // ResultEntity{result='SUCCESS', message='null', data=atguigu220827.oss-cn-guangzhou.aliyuncs.com/20220830/837093df-ee43-4370-8c44-48180fcb59eb.jpg}
+        System.out.println(uploadFilterOss("atguigu220827",
+                "oss-cn-guangzhou.aliyuncs.com",
+                "atguigu220827.oss-cn-guangzhou.aliyuncs.com",
+                "LTAI5t5vpW9Fcqk8qBW7nvcV",
+                "fWxGZing02E6uZKE4NNV9W8RrzjjCT",
+                inputStream,
+                "333.jpg"));
+    }
+
+    /**
+     * 专门负责上传文件到 OSS 服务器的工具方法
+     *
+     * @param bucketName
+     * @param endpoint
+     * @param bucketDomain
+     * @param accessKeyId
+     * @param accessKeySecret
+     * @param inputStream     要上传文件的输入流
+     * @param originalName    要上传文件的原始文件名
+     * @return
+     */
+    public static ResultEntity<String> uploadFilterOss(
+            String bucketName,
+            String endpoint,
+            String bucketDomain,
+            String accessKeyId,
+            String accessKeySecret,
+            InputStream inputStream,
+            String originalName) {
+        // 创建 OSSClient 实例
+        OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
+
+        // 生成生成文件的目录
+        String folderName = new SimpleDateFormat("yyyyMMdd").format(new Date());
+
+        // 生成生成文件在 OSS 服务器上保存时的文件名
+        // 原始文件名: beaufulgirl.jpg
+        // 生成文件名: wer234234efwer235346457dfswet346235.jpg
+        // 使用 UUID 生成文件主体名称
+        String fileMainName = UUID.randomUUID().toString().replace("_", "");
+
+        // 从原始文件名中获取文件扩展名
+        String extensionName = originalName.substring(originalName.lastIndexOf("."));
+
+        // 使用目录、文件主体名称、文件扩展名称拼接得到对象名称
+        String objectName = folderName + "/" + fileMainName + extensionName;
+
+        try {
+            // 调用 OSS 客户端对象的方法生成文件并获取响应结果数据
+            // 上传文件
+            PutObjectResult putObjectResult = ossClient.putObject(bucketName, objectName, inputStream);
+
+            // 从响应结果中获取具体响应消息
+            ResponseMessage responseMessage = putObjectResult.getResponse();
+
+            // 根据响应状态码判断请求是否成功
+            if (responseMessage == null) {
+                // 成功
+                // 拼接访问刚刚上传的文件路径
+                String ossFileAccessPath = bucketDomain + "/" + objectName;
+
+                return ResultEntity.successWithData(ossFileAccessPath);
+            } else {
+                // 获取响应状态码
+                int staticCode = responseMessage.getStatusCode();
+
+                // 如果请求没有成功, 获取错误消息
+                String errorMessage = responseMessage.getErrorResponseAsString();
+
+                // 当前方法返回失败
+                return ResultEntity.failed("当前响应状态码: " + staticCode + "错误消息: " + errorMessage);
+            }
+        } catch (Exception e) {
+            return ResultEntity.failed(e.getMessage());
+        } finally {
+            if (ossClient != null) {
+                ossClient.shutdown();
+            }
+        }
+    }
+
 
     /**
      * 给远程第三方接口发送请求把验证码发送到用户手机上
