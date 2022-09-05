@@ -28,8 +28,8 @@ public class CrowdUtil {
         FileInputStream inputStream = new FileInputStream("/Users/chenjianglin/Desktop/333.jpg");
         // ResultEntity{result='SUCCESS', message='null', data=atguigu220827.oss-cn-guangzhou.aliyuncs.com/20220830/837093df-ee43-4370-8c44-48180fcb59eb.jpg}
         System.out.println(uploadFilterOss("atguigu220827",
-                "oss-cn-guangzhou.aliyuncs.com",
-                "atguigu220827.oss-cn-guangzhou.aliyuncs.com",
+                "https://oss-cn-guangzhou.aliyuncs.com",
+                "https://atguigu220827.oss-cn-guangzhou.aliyuncs.com",
                 "LTAI5t5vpW9Fcqk8qBW7nvcV",
                 "fWxGZing02E6uZKE4NNV9W8RrzjjCT",
                 inputStream,
