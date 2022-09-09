@@ -16,6 +16,7 @@ public class CrowdConstant {
     public static final String MESSAGE_DETAIL_PIC_UPLOAD_FAILED = "详情图片上传失败!";
     public static final String MESSAGE_TEMPLE_PROJECT_MISSING = "临时存储的 projectVO 对象丢失!";
     public static final String MESSAGE_DETAIL_CONFIRM = "确认信息失败! 请先填写项目及发起人信息";
+    public static final String MESSAGE_HYSTRIX_BACKUP = "熔断机制生效: 方法执行出现问题";
 
     public static final String ATTR_NAME_LOGIN_ADMIN = "loginAdmin";
     public static final String ATTR_NAME_EXCEPTION = "exception";
