@@ -29,5 +29,5 @@ public class CrowdConstant {
     public static final String REDIS_CODE_PREFIX = "REDIS_CODE_PREFIX_";
 
     public static final String ZUUL_PATH_KEY = "zuulPath";
-    public static final String ZUUL_PATH_VALUE = "http://s1.com";
+    public static final String ZUUL_PATH_VALUE = "http://175.178.174.83";
 }
