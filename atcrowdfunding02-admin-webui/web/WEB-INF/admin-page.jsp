@@ -81,9 +81,11 @@
                         <button type="submit" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询
                         </button>
                     </form>
-                    <button type="button" class="btn btn-danger" style="float:right;margin-left:10px;"><i
-                            class=" glyphicon glyphicon-remove"></i> 删除
-                    </button>
+                    <security:authorize access="hasAuthority('user:delete')">
+                        <button type="button" class="btn btn-danger" style="float:right;margin-left:10px;"><i
+                                class=" glyphicon glyphicon-remove"></i> 删除
+                        </button>
+                    </security:authorize>
                     <!-- 旧代码
                     <button type="button" class="btn btn-primary" style="float:right;"
                             onclick="window.location.href='add.html'">

@@ -28,6 +28,7 @@ public class AdminHandler {
      * @param keyword
      * @return
      */
+    @PreAuthorize("hasAuthority('user:update')")
     @RequestMapping("/admin/update.html")
     public String updateAdmin(
             Admin admin,
@@ -79,6 +80,7 @@ public class AdminHandler {
      * @param keyword
      * @return
      */
+    @PreAuthorize("hasAuthority('user:delete')")
     @RequestMapping("/admin/remove/{adminId}/{pageNum}/{keyword}.html")
     public String removeAdminById(
             @PathVariable("adminId") Integer adminId,
@@ -107,6 +109,7 @@ public class AdminHandler {
      * @param modelMap
      * @return
      */
+    @PreAuthorize("hasAuthority('user:get')")
     @RequestMapping("/admin/get/page.html")
     public String getPageInfo(
             // 使用 @RequestParam 注解的 defaultValue 属性, 指定默认值, 在请求中没有携带对应参数时使用默认值

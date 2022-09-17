@@ -33,12 +33,17 @@
                                 class="glyphicon glyphicon-search"></i> 查询
                         </button>
                     </form>
-                    <button id="batchRemoveBtn" type="button" class="btn btn-danger" style="float:right;margin-left:10px;"><i
-                            class=" glyphicon glyphicon-remove"></i> 删除
-                    </button>
-                    <button id="showAddModalBtn" type="button" class="btn btn-primary" style="float:right;"
-                    ><i class="glyphicon glyphicon-plus"></i> 新增
-                    </button>
+                    <security:authorize access="hasAuthority('role:delete')">
+                        <button id="batchRemoveBtn" type="button" class="btn btn-danger"
+                                style="float:right;margin-left:10px;"><i
+                                class=" glyphicon glyphicon-remove"></i> 删除
+                        </button>
+                    </security:authorize>
+                    <security:authorize access="hasAuthority('role:save')">
+                        <button id="showAddModalBtn" type="button" class="btn btn-primary" style="float:right;"
+                        ><i class="glyphicon glyphicon-plus"></i> 新增
+                        </button>
+                    </security:authorize>
                     <br>
                     <hr style="clear:both;">
                     <div class="table-responsive">

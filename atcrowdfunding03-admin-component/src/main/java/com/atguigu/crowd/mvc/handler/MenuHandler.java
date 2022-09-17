@@ -4,6 +4,7 @@ import com.atguigu.crowd.entity.Menu;
 import com.atguigu.crowd.service.api.MenuService;
 import com.atguigu.crowd.util.ResultEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -16,24 +17,28 @@ public class MenuHandler {
     @Autowired
     private MenuService menuService;
 
+    @PreAuthorize("hasAuthority('menu:delete')")
     @DeleteMapping("/menu/delete.json")
     public ResultEntity<String> deleteMenu(@RequestBody Integer id) {
         menuService.deleteMenuById(id);
         return ResultEntity.successWithoutData();
     }
 
+    @PreAuthorize("hasAuthority('menu:update')")
     @PutMapping("/menu/update.json")
     public ResultEntity<String> updateMenu(@RequestBody Menu menu) {
         menuService.updateMenu(menu);
         return ResultEntity.successWithoutData();
     }
 
+    @PreAuthorize("hasAuthority('menu:save')")
     @PostMapping("/menu/save.json")
     public ResultEntity<String> saveMenu(Menu menu) {
         menuService.saveMenu(menu);
         return ResultEntity.successWithoutData();
     }
 
+    @PreAuthorize("hasAuthority('menu:get')")
     @GetMapping("/menu/get/whole/tree.json")
     public ResultEntity<Menu> getWholeTree2() {
         // 1. 查询全部的 Menu 对象

@@ -55,9 +55,27 @@ CREATE TABLE `inner_role_auth` (
 -- ----------------------------
 BEGIN;
 INSERT INTO `inner_role_auth` (`id`, `role_id`, `auth_id`) VALUES (1, 3, 4);
-INSERT INTO `inner_role_auth` (`id`, `role_id`, `auth_id`) VALUES (2, 4, 6);
-INSERT INTO `inner_role_auth` (`id`, `role_id`, `auth_id`) VALUES (3, 4, 3);
+INSERT INTO `inner_role_auth` (`id`, `role_id`, `auth_id`) VALUES (2, 4, 7);
+INSERT INTO `inner_role_auth` (`id`, `role_id`, `auth_id`) VALUES (3, 4, 8);
+INSERT INTO `inner_role_auth` (`id`, `role_id`, `auth_id`) VALUES (20, 5, 1);
+INSERT INTO `inner_role_auth` (`id`, `role_id`, `auth_id`) VALUES (21, 5, 4);
+INSERT INTO `inner_role_auth` (`id`, `role_id`, `auth_id`) VALUES (22, 5, 5);
+INSERT INTO `inner_role_auth` (`id`, `role_id`, `auth_id`) VALUES (23, 5, 6);
+INSERT INTO `inner_role_auth` (`id`, `role_id`, `auth_id`) VALUES (24, 5, 7);
+INSERT INTO `inner_role_auth` (`id`, `role_id`, `auth_id`) VALUES (25, 5, 2);
+INSERT INTO `inner_role_auth` (`id`, `role_id`, `auth_id`) VALUES (26, 5, 8);
+INSERT INTO `inner_role_auth` (`id`, `role_id`, `auth_id`) VALUES (27, 5, 9);
+INSERT INTO `inner_role_auth` (`id`, `role_id`, `auth_id`) VALUES (28, 5, 10);
+INSERT INTO `inner_role_auth` (`id`, `role_id`, `auth_id`) VALUES (29, 5, 11);
+INSERT INTO `inner_role_auth` (`id`, `role_id`, `auth_id`) VALUES (30, 5, 3);
+INSERT INTO `inner_role_auth` (`id`, `role_id`, `auth_id`) VALUES (31, 5, 12);
+INSERT INTO `inner_role_auth` (`id`, `role_id`, `auth_id`) VALUES (32, 5, 13);
+INSERT INTO `inner_role_auth` (`id`, `role_id`, `auth_id`) VALUES (33, 5, 14);
+INSERT INTO `inner_role_auth` (`id`, `role_id`, `auth_id`) VALUES (34, 5, 15);
 COMMIT;
+
+SET FOREIGN_KEY_CHECKS = 1;
+
 
 -- ----------------------------
 -- Table structure for t_admin
@@ -102,14 +120,25 @@ CREATE TABLE `t_auth` (
 -- Records of t_auth
 -- ----------------------------
 BEGIN;
-INSERT INTO `t_auth` (`id`, `name`, `title`, `category_id`) VALUES (1, '', '用户模块', NULL);
-INSERT INTO `t_auth` (`id`, `name`, `title`, `category_id`) VALUES (2, 'user:delete', '删除', 1);
-INSERT INTO `t_auth` (`id`, `name`, `title`, `category_id`) VALUES (3, 'user:get', '查询', 1);
+INSERT INTO `t_auth` (`id`, `name`, `title`, `category_id`) VALUES (1, '', '用户维护', NULL);
+INSERT INTO `t_auth` (`id`, `name`, `title`, `category_id`) VALUES (2, '', '角色维护', NULL);
+INSERT INTO `t_auth` (`id`, `name`, `title`, `category_id`) VALUES (3, '', '权限维护', NULL);
+
 INSERT INTO `t_auth` (`id`, `name`, `title`, `category_id`) VALUES (4, 'user:save', '保存', 1);
-INSERT INTO `t_auth` (`id`, `name`, `title`, `category_id`) VALUES (5, '', '角色模块', NULL);
-INSERT INTO `t_auth` (`id`, `name`, `title`, `category_id`) VALUES (6, 'role:delete', '删除', 4);
-INSERT INTO `t_auth` (`id`, `name`, `title`, `category_id`) VALUES (7, 'role:get', '查询', 4);
-INSERT INTO `t_auth` (`id`, `name`, `title`, `category_id`) VALUES (8, 'role:save', '保存', 4);
+INSERT INTO `t_auth` (`id`, `name`, `title`, `category_id`) VALUES (5, 'user:delete', '删除', 1);
+INSERT INTO `t_auth` (`id`, `name`, `title`, `category_id`) VALUES (6, 'user:update', '修改', 1);
+INSERT INTO `t_auth` (`id`, `name`, `title`, `category_id`) VALUES (7, 'user:get', '查询', 1);
+
+INSERT INTO `t_auth` (`id`, `name`, `title`, `category_id`) VALUES (8, 'role:save', '保存', 2);
+INSERT INTO `t_auth` (`id`, `name`, `title`, `category_id`) VALUES (9, 'role:delete', '删除', 2);
+INSERT INTO `t_auth` (`id`, `name`, `title`, `category_id`) VALUES (10, 'role:update', '保存', 2);
+INSERT INTO `t_auth` (`id`, `name`, `title`, `category_id`) VALUES (11, 'role:get', '查询', 2);
+
+INSERT INTO `t_auth` (`id`, `name`, `title`, `category_id`) VALUES (12, 'menu:save', '保存', 3);
+INSERT INTO `t_auth` (`id`, `name`, `title`, `category_id`) VALUES (13, 'menu:delete', '删除', 3);
+INSERT INTO `t_auth` (`id`, `name`, `title`, `category_id`) VALUES (14, 'menu:update', '保存', 3);
+INSERT INTO `t_auth` (`id`, `name`, `title`, `category_id`) VALUES (15, 'menu:get', '查询', 3);
+
 COMMIT;
 
 -- ----------------------------

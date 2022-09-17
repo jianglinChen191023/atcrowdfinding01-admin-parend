@@ -20,6 +20,7 @@ public class RoleHandler {
     @Autowired
     private RoleService roleService;
 
+    @PreAuthorize("hasAuthority('role:delete')")
     @ResponseBody
     @RequestMapping("/role/remove/by/role/id/array.json")
     public ResultEntity<String> removeByRoleIdArray(@RequestBody List<Integer> roleList){
@@ -33,6 +34,7 @@ public class RoleHandler {
      * @param role
      * @return
      */
+    @PreAuthorize("hasAuthority('role:update')")
     @ResponseBody
     @RequestMapping("/role/update.json")
     public ResultEntity<String> updateRole(Role role){
@@ -46,6 +48,7 @@ public class RoleHandler {
      * @param role
      * @return
      */
+    @PreAuthorize("hasAuthority('role:save')")
     @ResponseBody
     @RequestMapping("/role/save.json")
     public ResultEntity<String> saveRole(Role role){
@@ -53,7 +56,7 @@ public class RoleHandler {
         return ResultEntity.successWithoutData();
     }
 
-    @PreAuthorize("hasRole('部长')")
+    @PreAuthorize("hasRole('部长') or hasAuthority('role:get')")
     @ResponseBody
     @RequestMapping("/role/get/page/info.json")
     public ResultEntity<PageInfo<Role>> Test(
